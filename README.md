@@ -1,5 +1,7 @@
 Incidence report data collection script README v2.0
 
+# Description
+
 This script collects various system data to produce an incidence report and an archive of system files
 for the purpose of forensic inspection and currently supports `Linux`/`IBM AIX`/`Sun Solaris` and `HP-UX`. 
 
@@ -36,11 +38,12 @@ The second file contains the md5 sum of the archive file.
 The full details of commands and collected files for the presented data in the archive and the report file 
 are presented below:
 
-### COLLECTED FILES
+# COLLECTED FILES
 
     Tar archive includes this files & directories for all supported OS's
 
-[ALL]
+## [ALL]
+```
 /var/log 
 /var/spool/cron 
 /etc/passwd 
@@ -56,92 +59,123 @@ are presented below:
 .bashrc
 .*profile
 [any root SUID/SGID files]
+```
 
-[RHEL]
+## [RHEL]
+```
 /etc/fstab 
 /var/spool/at 
 /proc/cpuinfo 
 /proc/meminfo 
 /proc/modules
 /etc/sysconfig/network-scripts
+```
 
-[SOLARIS]
+## [SOLARIS]
+```
 /etc/ipf/ipf.conf
+```
 
-[AIX]
+## [AIX]
+```
 /var/adm/ras
 /var/adm/cronlog
+```
 
-[HPUX]
+## [HPUX]
+```
 /var/adm/syslog
 /var/adm/cron
 /var/sam/log
+```
 
+# USER INFO
 
-#### USER INFO
-
-[ALL]
+## [ALL]
+```
 who
 id
 sudo -l
 getent passwd
+```
 
-[RHEL]
+## [RHEL]
+```
 last -dFwx
+```
 
-[SOLARIS|AIX|HPUX]
+## [SOLARIS|AIX|HPUX]
+```
 last
+```
 
-### Network info
+# Network information
 
-[ALL]
+## [ALL]
+```
 ifconfig -a
 netstat -an
 netstat -rn
+```
 
-[RHEL]
+## [RHEL]
+```
 lsof -i
 iptables -S
+```
 
-[SOLARIS]
+## [SOLARIS]
+```
 pfiles /proc/* #lsof equiv
+```
 
-[AIX]
+## [AIX]
+```
 lsof -i
 lsfilt
+```
 
-[HPUX]
+## [HPUX]
+```
 lsof -i
 ipf -V # firewall rules
 ipfstat -i
 ipfstat -i -6
 ipfstat -o
 ipfstat -o -6
+```
 
-### HOST INFO
+# HOST Information
 
-[ALL]
+## [ALL]
+```
 hostname
 date
 uname -a
 uptime
 vmstat
 dmesg
+```
 
-[RHEL]
+## [RHEL]
+```
 lsmod
 cat /etc/redhat-release
 sestatus -v
 cat /proc/meminfo
 cat /proc/cpuinfo
+```
 
-[SOLARIS]
+## [SOLARIS]
+```
 psrinfo -v # Processor info
 isainfo -nv
 hostid
 prtconf # Memory information
+```
 
-[AIX]
+## [AIX]
+```
 oslevel
 prtconf | grep -i 'Processor Type'
 getconf KERNEL_BITMODE
@@ -149,8 +183,10 @@ getconf HARDWARE_BITMODE
 prtconf -k
 uname -m
 prtconf -m # Memory information
+```
 
-[HPUX]
+## [HPUX]
+```
 print_manifest
 /opt/ignite/bin/print_manifest
 machinfo
@@ -158,66 +194,92 @@ uname -i
 swapinfo -m
 dmesg |grep -I physical
 kmadmin -s # lsmod equiv
+```
 
-### CRON AND AT JOBS
+# CRON AND AT JOBS
 
-[ALL]
+## [ALL]
+```
 for i in $(getent passwd | cut -d : -f 1);do log "crontab -l $i";done
+```
 
-[RHEL]
+## [RHEL]
+```
 sudo atq
+```
 
-[SOLARIS|HPUX]
+## [SOLARIS|HPUX]
+```
 sudo atq
 sudo at -l
+```
 
-[AIX]
+## [AIX]
+```
 cronadm cron  -l
 cronadm at -l
+```
 
-#### DISK INFO
+# DISK Information
 
-[ALL]
+## [ALL]
+```
 df -h
 du -ch -d [1] /
 mount [-l]
+```
 
-[RHEL]
+## [RHEL]
+```
 fdisk -l
+```
 
-[SOLARIS]
+## [SOLARIS]
+```
 echo|format # fdisk -l equivalent
+```
 
-[AIX]
+## [AIX]
+```
 lsvg
 lslv
 lquerypv
 lquerylv
 lsdev -Cc disk
+```
 
-[HPUX]
+## [HPUX]
+```
 strings /etc/lvmtab
 pvdisplay -v
 ioscan -funC disk
 diskinfo
+```
 
-### SOFTWARE INFO
+# SOFTWARE Information
 
-[RHEL]
+## [RHEL]
+```
 yum list all
 yum history list
 rpm -Va
+```
 
-[SOLARIS]
+## [SOLARIS]
+```
 pkg list
+```
 
-[AIX]
+## [AIX]
+```
 lslpp -h all
 lslpp -L all
 rpm -qav
 rpm -Va
+```
 
-[HPUX]
+## [HPUX]
+```
 swlist -l product PH* # HPUX 10.x
 swlist -l patch # HPUX 11
-
+```
