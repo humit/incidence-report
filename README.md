@@ -1,16 +1,17 @@
 Incidence report data collection script README v2.0
 
 This script collects various system data to produce an incidence report and an archive of system files
-for the purpose of forensic inspection and currently supports Linux/IBM AIX/Sun Solaris and HP-UX . 
+for the purpose of forensic inspection and currently supports `Linux`/`IBM AIX`/`Sun Solaris` and `HP-UX`. 
 
-In order to prevent any unwanted system load it runs the commands via the log() function which uses 
-the 'nice' command to execute commands with lower priority. 
+In order to prevent any unwanted system load it runs the commands via the `log()` function which uses 
+the `nice` command to execute commands with lower priority. 
 
-For this purpose, all new commands should use log() function to call them.
+For this purpose, all new commands should use `log()` function to prevent degraded performance on 
+production systems.
 
-Script should be run as root user, either directly by root user or via the su/sudo commands.
+Script should be run as `root` user, either directly by root user or via the `su`/`sudo` commands.
 
-The directories for MD5SUM collection is listed inside MD5SUMDIRS variable. It should be modified 
+The directories for MD5SUM collection is listed inside `MD5SUMDIRS` variable. It should be modified 
 inside the script according to the needs.
 
 When run, it first creates a tar archive and then collects the information in the following order:
