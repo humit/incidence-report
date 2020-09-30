@@ -9,7 +9,7 @@
 # The full output archive can be fount at /tmp/IR-Report-xxxxxxx.tar with a md5 sum file.
 # PLEASE edit MD5SUMDIRS variable to specify the list of directories to create MD5SUMs
 
-VERSION="0.2.6.1"
+VERSION="2.0"
 
 #SET UMASK for rw-------
 umask 0177
