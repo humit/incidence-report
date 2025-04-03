@@ -40,7 +40,7 @@ are presented below:
 
 # COLLECTED FILES
 
-    Tar archive includes this files & directories for all supported OS's
+    Tar archive includes the following files & directories for all supported OS's
 
 ## [ALL]
 ```
